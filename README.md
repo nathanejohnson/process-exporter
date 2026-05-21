@@ -1,5 +1,8 @@
 # process-exporter
-Prometheus exporter that mines /proc to report on selected processes.
+Prometheus exporter that mines /proc or sysctl to report on selected processes.
+
+Forked from [https://github.com/ncabatoff/process-exporter](https://github.com/ncabatoff/process-exporter) to add
+FreeBSD support
 
 [release]: https://github.com/nathanejohnson/process-exporter/releases/latest
 
@@ -9,7 +12,7 @@ Prometheus exporter that mines /proc to report on selected processes.
 
 Some apps are impractical to instrument directly, either because you
 don't control the code or they're written in a language that isn't easy to
-instrument with Prometheus.  We must instead resort to mining /proc.
+instrument with Prometheus.  We must instead resort to mining sysctl or /proc.
 
 ## Installation
 
@@ -30,6 +33,16 @@ or via docker:
   docker run -d --rm -p 9256:9256 --privileged -v /proc:/host/proc -v `pwd`:/config nathanejohnson/process-exporter --procfs /host/proc -config.path /config/filename.yml
 
 ```
+
+on FreeBSD, there is an rc script located at [fbsd/rc.d/process_explorer](fbsd/rc.d/process_explorer).  Copy this
+to /usr/local/etc/rc.d , create a /usr/local/etc/process_explorer.yml file as a config, and you can edit the
+/etc/rc.conf file to start the file with the following:
+
+```
+  process_exporter_enable="YES"
+```
+
+Then copy the binary to /usr/local/bin.  
 
 Important options (run process-exporter --help for full list):
 
