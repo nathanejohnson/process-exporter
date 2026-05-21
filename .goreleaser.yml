@@ -11,6 +11,7 @@ builds:
       - CGO_ENABLED=0
     goos:
       - linux
+      - freebsd
     goarch:
       - amd64
       - 386
@@ -27,7 +28,7 @@ archives:
 checksum:
   name_template: checksums.txt
 nfpms:
-  - homepage: https://github.com/ncabatoff/process-exporter
+  - homepage: https://github.com/nathanejohnson/process-exporter
     maintainer: nick.cabatoff+procexp@gmail.com
     description: Prometheus exporter to report on processes running
     license: MIT
@@ -51,7 +52,7 @@ nfpms:
       preremove: "packaging/scripts/preremove.sh"
 release:
   github:
-    owner: ncabatoff
+    owner: nathanejohnson
     name: process-exporter
   draft: false
   prerelease: true

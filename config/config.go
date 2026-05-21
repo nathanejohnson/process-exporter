@@ -11,7 +11,7 @@ import (
 	"text/template"
 	"time"
 
-	common "github.com/ncabatoff/process-exporter"
+	common "github.com/nathanejohnson/process-exporter"
 	"gopkg.in/yaml.v2"
 )
 

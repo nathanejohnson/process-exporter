@@ -4,8 +4,8 @@ import (
 	"log"
 	"time"
 
-	common "github.com/ncabatoff/process-exporter"
-	"github.com/ncabatoff/process-exporter/proc"
+	common "github.com/nathanejohnson/process-exporter"
+	"github.com/nathanejohnson/process-exporter/proc"
 	"github.com/prometheus/client_golang/prometheus"
 )
 

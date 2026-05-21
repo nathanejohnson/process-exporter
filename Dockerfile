@@ -3,7 +3,7 @@
 FROM --platform=$BUILDPLATFORM golang:1.23.8 AS build
 ARG TARGETARCH
 ARG BUILDPLATFORM
-WORKDIR /go/src/github.com/ncabatoff/process-exporter
+WORKDIR /go/src/github.com/nathanejohnson/process-exporter
 ADD . .
 
 # Build the process-exporter command inside the container.
@@ -11,7 +11,7 @@ RUN CGO_ENABLED=0 GOARCH=$TARGETARCH make build
 
 FROM scratch
 
-COPY --from=build /go/src/github.com/ncabatoff/process-exporter/process-exporter /bin/process-exporter
+COPY --from=build /go/src/github.com/nathanejohnson/process-exporter/process-exporter /bin/process-exporter
 
 # Run the process-exporter command by default when the container starts.
 ENTRYPOINT ["/bin/process-exporter"]

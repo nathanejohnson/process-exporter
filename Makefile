@@ -1,14 +1,14 @@
-pkgs          = $(shell go list ./...)
+pkgs          != go list ./...
 
-PREFIX                  ?= $(shell pwd)
-BIN_DIR                 ?= $(shell pwd)
-DOCKER_IMAGE_NAME       ?= ncabatoff/process-exporter
+PREFIX                  != pwd
+BIN_DIR                 != pwd
+DOCKER_IMAGE_NAME       ?= nathanejohnson/process-exporter
 
-BRANCH      ?= $(shell git rev-parse --abbrev-ref HEAD)
-BUILDDATE   ?= $(shell date --iso-8601=seconds)
-BUILDUSER   ?= $(shell whoami)@$(shell hostname)
-REVISION    ?= $(shell git rev-parse HEAD)
-TAG_VERSION ?= $(shell git describe --tags --abbrev=0)
+BRANCH      != git rev-parse --abbrev-ref HEAD
+BUILDDATE   != date -u +%Y-%m-%dT%H:%M:%S%z 2>/dev/null || date --iso-8601=seconds
+BUILDUSER   != echo "$$(whoami)@$$(hostname)"
+REVISION    != git rev-parse HEAD
+TAG_VERSION != git describe --tags --abbrev=0
 
 VERSION_LDFLAGS := \
   -X github.com/prometheus/common/version.Branch=$(BRANCH) \
@@ -23,7 +23,7 @@ all: format vet test build smoke
 
 style:
 	@echo ">> checking code style"
-	@! gofmt -d $(shell find . -name '*.go' -print) | grep '^'
+	@! gofmt -d $$(find . -name '*.go' -print) | grep '^'
 
 test:
 	@echo ">> running short tests"
@@ -64,10 +64,10 @@ docker:
 	docker run --rm --volumes-from configs "$(DOCKER_IMAGE_NAME):$(TAG_VERSION)" $(SMOKE_TEST)
 
 dockertest:
-	docker run --rm -it -v `pwd`:/go/src/github.com/ncabatoff/process-exporter golang:1.23.8  make -C /go/src/github.com/ncabatoff/process-exporter test
+	docker run --rm -it -v `pwd`:/go/src/github.com/nathanejohnson/process-exporter golang:1.23.8  make -C /go/src/github.com/nathanejohnson/process-exporter test
 
 dockerinteg:
-	docker run --rm -it -v `pwd`:/go/src/github.com/ncabatoff/process-exporter golang:1.23.8  make -C /go/src/github.com/ncabatoff/process-exporter build integ
+	docker run --rm -it -v `pwd`:/go/src/github.com/nathanejohnson/process-exporter golang:1.23.8  make -C /go/src/github.com/nathanejohnson/process-exporter build integ
 
 .PHONY: update-go-deps
 update-go-deps:

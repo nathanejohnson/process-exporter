@@ -10,13 +10,13 @@ steps:
 
   # Setup the workspace
   - name: gcr.io/cloud-builders/go
-    env: ['PROJECT_ROOT=github.com/ncabatoff/process-exporter']
+    env: ['PROJECT_ROOT=github.com/nathanejohnson/process-exporter']
     args: ['env']
 
   # Build project
   - name: gcr.io/cloud-builders/docker
     entrypoint: 'bash'
-    args: ['-c', 'docker build -t ncabatoff/process-exporter:`echo $TAG_NAME|sed s/^v//` .']
+    args: ['-c', 'docker build -t nathanejohnson/process-exporter:`echo $TAG_NAME|sed s/^v//` .']
 
   # Login to docker hub
   - name: gcr.io/cloud-builders/docker
@@ -27,14 +27,14 @@ steps:
   # Push to docker hub
   - name: gcr.io/cloud-builders/docker
     entrypoint: 'bash'
-    args: ['-c', 'docker push ncabatoff/process-exporter:`echo $TAG_NAME|sed s/^v//`']
+    args: ['-c', 'docker push nathanejohnson/process-exporter:`echo $TAG_NAME|sed s/^v//`']
 
   # Create github release
   - name: goreleaser/goreleaser
     entrypoint: /bin/sh
     dir: gopath/src/github.com
     env: ['GOPATH=/workspace/gopath']
-    args: ['-c', 'cd ncabatoff/process-exporter && git tag $TAG_NAME && /goreleaser' ]
+    args: ['-c', 'cd nathanejohnson/process-exporter && git tag $TAG_NAME && /goreleaser' ]
     secretEnv: ['GITHUB_TOKEN']
 
 secrets:
