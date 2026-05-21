@@ -1,11 +1,11 @@
 # process-exporter
 Prometheus exporter that mines /proc to report on selected processes.
 
-[release]: https://github.com/ncabatoff/process-exporter/releases/latest
+[release]: https://github.com/nathanejohnson/process-exporter/releases/latest
 
-[![Release](https://img.shields.io/github/release/ncabatoff/process-exporter.svg?style=flat-square")][release]
+[![Release](https://img.shields.io/github/release/nathanejohnson/process-exporter.svg?style=flat-square")][release]
 [![Powered By: GoReleaser](https://img.shields.io/badge/powered%20by-goreleaser-green.svg?branch=master)](https://github.com/goreleaser)
-![Build](https://github.com/ncabatoff/process-exporter/actions/workflows/build.yml/badge.svg)
+![Build](https://github.com/nathanejohnson/process-exporter/actions/workflows/build.yml/badge.svg)
 
 Some apps are impractical to instrument directly, either because you
 don't control the code or they're written in a language that isn't easy to
@@ -14,7 +14,7 @@ instrument with Prometheus.  We must instead resort to mining /proc.
 ## Installation
 
 Either grab a package for your OS from the [Releases][release] page, or
-install via [docker](https://hub.docker.com/r/ncabatoff/process-exporter/).
+install via [docker](https://hub.docker.com/r/nathanejohnson/process-exporter/).
 
 ## Running
 
@@ -27,7 +27,7 @@ Usage:
 or via docker:
 
 ```
-  docker run -d --rm -p 9256:9256 --privileged -v /proc:/host/proc -v `pwd`:/config ncabatoff/process-exporter --procfs /host/proc -config.path /config/filename.yml
+  docker run -d --rm -p 9256:9256 --privileged -v /proc:/host/proc -v `pwd`:/config nathanejohnson/process-exporter --procfs /host/proc -config.path /config/filename.yml
 
 ```
 

@@ -4,7 +4,7 @@ import (
 	"time"
 
 	seq "github.com/ncabatoff/go-seq/seq"
-	common "github.com/ncabatoff/process-exporter"
+	common "github.com/nathanejohnson/process-exporter"
 )
 
 type (
