@@ -34,15 +34,18 @@ or via docker:
 
 ```
 
-on FreeBSD, there is an rc script located at [fbsd/rc.d/process_explorer](fbsd/rc.d/process_explorer).  Copy this
-to /usr/local/etc/rc.d , create a /usr/local/etc/process_explorer.yml file as a config, and you can edit the
-/etc/rc.conf file to start the file with the following:
+on FreeBSD, there is an rc script located at
+
+[fbsd/rc.d/process_exporter](fbsd/rc.d/process_exporter).
+
+Copy this to `/usr/local/etc/rc.d` , create a `/usr/local/etc/process_explorer.yml` file as a config, and you can edit the
+`/etc/rc.conf` file to start the file with the following:
 
 ```
   process_exporter_enable="YES"
 ```
 
-Then copy the binary to /usr/local/bin.  
+Then copy the binary to `/usr/local/bin`.
 
 Important options (run process-exporter --help for full list):
 
