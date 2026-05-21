@@ -12,7 +12,7 @@ import (
 	"time"
 
 	common "github.com/nathanejohnson/process-exporter"
-	"gopkg.in/yaml.v2"
+	"github.com/goccy/go-yaml"
 )
 
 type (

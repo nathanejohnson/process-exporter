@@ -3,6 +3,7 @@ module github.com/nathanejohnson/process-exporter
 go 1.25.0
 
 require (
+	github.com/goccy/go-yaml v1.19.2
 	github.com/google/go-cmp v0.6.0
 	github.com/ncabatoff/fakescraper v0.0.0-20201102132415-4b37ba603d65
 	github.com/ncabatoff/go-seq v0.0.0-20180805175032-b08ef85ed833
@@ -10,8 +11,8 @@ require (
 	github.com/prometheus/common v0.52.3
 	github.com/prometheus/exporter-toolkit v0.11.0
 	github.com/prometheus/procfs v0.14.0
+	golang.org/x/sys v0.44.0
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c
-	gopkg.in/yaml.v2 v2.4.0
 )
 
 require (
@@ -32,8 +33,8 @@ require (
 	golang.org/x/net v0.36.0 // indirect
 	golang.org/x/oauth2 v0.18.0 // indirect
 	golang.org/x/sync v0.11.0 // indirect
-	golang.org/x/sys v0.44.0 // indirect
 	golang.org/x/text v0.22.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/protobuf v1.33.0 // indirect
+	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
