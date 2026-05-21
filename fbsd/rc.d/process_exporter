@@ -1,0 +1,51 @@
+#!/bin/sh
+#
+# PROVIDE: process_exporter
+# REQUIRE: NETWORKING
+# KEYWORD: shutdown
+#
+# Add the following lines to /etc/rc.conf to enable process_exporter:
+# process_exporter_enable="YES"
+# process_exporter_flags=""            # optional extra flags
+# process_exporter_user="process_exporter"       # optional
+# process_exporter_group="process_exporter"      # optional
+# process_exporter_config="/usr/local/etc/process_exporter.yml"  # optional
+# ${process_exporter_pidfile="/var/run/${name}.pid" # optional
+
+. /etc/rc.subr
+
+name="process_exporter"
+rcvar="process_exporter_enable"
+
+: ${process_exporter_enable:="NO"}
+: ${process_exporter_user:="root"}
+: ${process_exporter_group:="wheel"}
+: ${process_exporter_flags:=""}
+: ${process_exporter_config:="/usr/local/etc/${name}.yml"}
+: ${process_exporter_pidfile="/var/run/${name}.pid"}
+
+command="/usr/sbin/daemon"
+procname="/usr/local/bin/process-exporter"
+command_args="-f -p ${process_exporter_pidfile} -T ${name} \
+    ${procname} --config.path ${process_exporter_config} \
+    ${process_exporter_flags}"
+
+
+# If your daemon needs a config argument, keep this. Otherwise remove it.
+
+# Make sure pidfile is created by the daemon, or use daemon(8) below.
+# If your program *does not* daemonize itself, comment out command/command_args
+# above and use the daemon(8) wrapper like this:
+# command="/usr/sbin/daemon"
+# command_args="-f -p ${pidfile} /usr/local/sbin/${name} -c ${process_exporter_config} ${process_exporter_flags}"
+
+start_precmd="${name}_prestart"
+
+process_exporter_prestart()
+{
+    # Ensure runtime dir exists
+    install -d -o "${process_exporter_user}" -g "${process_exporter_group}" -m 0755 /var/run
+}
+
+load_rc_config "$name"
+run_rc_command "$1"
