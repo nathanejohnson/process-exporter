@@ -1,14 +1,14 @@
-pkgs          = $(shell go list ./...)
+pkgs          != go list ./...
 
-PREFIX                  ?= $(shell pwd)
-BIN_DIR                 ?= $(shell pwd)
+PREFIX                  != pwd
+BIN_DIR                 != pwd
 DOCKER_IMAGE_NAME       ?= ncabatoff/process-exporter
 
-BRANCH      ?= $(shell git rev-parse --abbrev-ref HEAD)
-BUILDDATE   ?= $(shell date --iso-8601=seconds)
-BUILDUSER   ?= $(shell whoami)@$(shell hostname)
-REVISION    ?= $(shell git rev-parse HEAD)
-TAG_VERSION ?= $(shell git describe --tags --abbrev=0)
+BRANCH      != git rev-parse --abbrev-ref HEAD
+BUILDDATE   != date -u +%Y-%m-%dT%H:%M:%S%z 2>/dev/null || date --iso-8601=seconds
+BUILDUSER   != echo "$$(whoami)@$$(hostname)"
+REVISION    != git rev-parse HEAD
+TAG_VERSION != git describe --tags --abbrev=0
 
 VERSION_LDFLAGS := \
   -X github.com/prometheus/common/version.Branch=$(BRANCH) \
@@ -23,7 +23,7 @@ all: format vet test build smoke
 
 style:
 	@echo ">> checking code style"
-	@! gofmt -d $(shell find . -name '*.go' -print) | grep '^'
+	@! gofmt -d $$(find . -name '*.go' -print) | grep '^'
 
 test:
 	@echo ">> running short tests"
